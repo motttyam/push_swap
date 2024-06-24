@@ -1,7 +1,6 @@
 NAME = push_swap
 
 CC = cc
-
 CFLAGS = -Wall -Werror -Wextra
 
 SOURCES = 0_main.c \
@@ -26,13 +25,18 @@ SOURCES = 0_main.c \
           funcs_split.c \
           test_funcs.c
 
+OBJECTS = $(SOURCES:.c=.o)
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(NAME) $(SOURCES)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.txt
+	rm -f $(OBJECTS)
 
 fclean: clean
 	rm -f $(NAME)
